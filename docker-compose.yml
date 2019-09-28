@@ -1,0 +1,69 @@
+version: "3.7"
+services:
+  frontend:
+    image: "ajris/site_frontend:master"
+    build: ./site_frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+      - api-gateway
+      - discovery-service
+      - database
+    networks:
+      - api-network
+  backend:
+    image: "ajris/site_backend:master"
+    build: ./site_backend
+    expose:
+      - "8080"
+    depends_on:
+      - api-gateway
+      - discovery-service
+      - database
+    networks:
+      - backend-network
+    environment:
+      EUREKA_SERVER: http://discovery-service:8761/eureka/
+      MYSQL_HOST: database
+  api-gateway:
+    image: "ajris/site_api-gateway:master"
+    build: ./site_api-gateway
+    ports:
+      - "8081:8081"
+    depends_on:
+      - discovery-service
+      - database
+    networks:
+      - api-network
+      - backend-network
+    environment:
+      EUREKA_SERVER: http://discovery-service:8761/eureka/
+  discovery-service:
+    image: "ajris/site_discovery-service:master"
+    build: ./site_discovery-service
+    ports:
+      - "8761:8761"
+    networks:
+      - backend-network
+  database:
+    image: mysql
+    restart: always
+    expose:
+      - "3306"
+    environment:
+      MYSQL_USER: ajris
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: site_backend
+    networks:
+      - backend-network
+    volumes:
+      - my-db:/var/lib/mysql
+
+networks:
+  api-network:
+  backend-network:
+
+volumes:
+  my-db:
