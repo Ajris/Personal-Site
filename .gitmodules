@@ -1,0 +1,15 @@
+[submodule "API Gateway"]
+	path = ./site_api-gateway
+	url = git@github.com:Ajris/site_api-gateway.git
+
+[submodule "Backend Service"]
+	path = ./site_backend
+	url = git@github.com:Ajris/site_backend.git
+
+[submodule "Discovery Service"]
+	path = ./site_discovery-service
+	url = git@github.com:Ajris/site_discovery-service.git
+
+[submodule "Frontend Service"]
+	path = ./site_frontend
+	url = git@github.com:Ajris/site_frontend.git
