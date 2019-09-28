@@ -1,0 +1,7 @@
+allprojects {
+    task printSubmodules {
+        doLast { task ->
+            println "Microservice: $task.project.name"
+        }
+    }
+}
