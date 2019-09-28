@@ -42,8 +42,8 @@ services:
   discovery-service:
     image: "ajris/site_discovery-service:master"
     build: ./site_discovery-service
-    ports:
-      - "8761:8761"
+    expose:
+      - "8761"
     networks:
       - backend-network
   database:
