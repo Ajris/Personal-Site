@@ -22,7 +22,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: REACT_APP_API_BASE_URL
-              value: "http://192.168.99.100:30098/api"
+              value: "http://192.168.99.100:30489"
 ---
 apiVersion: v1
 kind: Service

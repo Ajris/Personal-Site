@@ -15,7 +15,7 @@ spec:
         app: backend
     spec:
       containers:
-        - name: backend
+        - name: backend-service
           image: ajris/site_backend:latest
           ports:
             - containerPort: 8080
@@ -29,7 +29,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend-service
+  name: backend
   labels:
     app: backend
 spec:
